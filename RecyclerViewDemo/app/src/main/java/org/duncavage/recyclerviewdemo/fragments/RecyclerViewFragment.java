@@ -36,6 +36,7 @@ public class RecyclerViewFragment extends Fragment implements ListView<ListItemV
     private ListView.Events eventsListener;
 
     public enum LayoutType {
+        MyLinear,
         Linear,
         Grid,
         GridWithGroupHeadings,

@@ -46,7 +46,11 @@ public class ListPagerFragment extends Fragment {
             ((MainActivity) getActivity()).setToolbarRightButtonClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ((ListPagerAdapter)viewPager.getAdapter()).currentFragment.addNewItem();
+                    if (viewPager.getCurrentItem() == 0) {
+                        ((ListPagerAdapter) viewPager.getAdapter()).myRecyclerFragment.addNewItem();
+                    } else {
+                        ((ListPagerAdapter) viewPager.getAdapter()).currentFragment.addNewItem();
+                    }
                 }
             });
         }
@@ -54,6 +58,7 @@ public class ListPagerFragment extends Fragment {
 
     private class ListPagerAdapter extends FragmentPagerAdapter {
         public RecyclerViewFragment currentFragment;
+        public MyRecyclerFragment myRecyclerFragment;
         public ListPagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -65,13 +70,21 @@ public class ListPagerFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            return RecyclerViewFragment.newInstance(RecyclerViewFragment.LayoutType.values()[position]);
+            if (position == 0) {
+                return MyRecyclerFragment.newInstance();
+            } else {
+                return RecyclerViewFragment.newInstance(RecyclerViewFragment.LayoutType.values()[position]);
+            }
         }
 
         @Override
         public void setPrimaryItem(ViewGroup container, int position, Object object) {
             super.setPrimaryItem(container, position, object);
-            currentFragment = (RecyclerViewFragment)object;
+            if (position == 0) {
+                myRecyclerFragment = (MyRecyclerFragment) object;
+            } else {
+                currentFragment = (RecyclerViewFragment)object;
+            }
         }
 
         @Override
@@ -81,6 +94,8 @@ public class ListPagerFragment extends Fragment {
 
         private String getTitleForLayoutType(RecyclerViewFragment.LayoutType type) {
             switch (type) {
+                case MyLinear:
+                    return getString(R.string.page_title_linear_my);
                 case Linear:
                     return getString(R.string.page_title_linear);
                 case Grid:

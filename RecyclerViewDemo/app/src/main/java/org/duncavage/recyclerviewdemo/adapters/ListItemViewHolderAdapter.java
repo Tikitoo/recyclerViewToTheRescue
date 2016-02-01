@@ -142,6 +142,7 @@ public class ListItemViewHolderAdapter<T extends ListItemViewModel>
                 }, delay);
                 lastAnimatedPosition = position;
             }
+
         }
     }
 

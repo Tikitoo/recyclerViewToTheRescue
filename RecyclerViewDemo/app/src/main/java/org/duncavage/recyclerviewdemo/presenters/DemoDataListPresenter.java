@@ -28,7 +28,7 @@ public class DemoDataListPresenter extends ListPresenter<ListItemViewModel>
             "http://rdiodynimages3-a.akamaihd.net/?l=a5743329-1",
     };
 
-    private static final String[] ITEM_IMAGE_URLS = {
+    public static final String[] ITEM_IMAGE_URLS = {
             "http://rdiodynimages0-a.akamaihd.net/?l=a5791435-1",
             "http://rdiodynimages0-a.akamaihd.net/?l=a5776410-1",
             "http://rdiodynimages1-a.akamaihd.net/?l=a5732739-4",
@@ -97,7 +97,6 @@ public class DemoDataListPresenter extends ListPresenter<ListItemViewModel>
         vm.secondary = stringProvider.getStringForResource(R.string.new_item_secondary);
         int randAlbum = new Random().nextInt(NEW_ITEM_IMAGE_URLS.length);
         vm.imageUrl = NEW_ITEM_IMAGE_URLS[randAlbum];
-
         return vm;
     }
 
